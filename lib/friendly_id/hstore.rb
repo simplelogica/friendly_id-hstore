@@ -69,6 +69,9 @@ module FriendlyId
       ::I18n.locale = actual_locale
     end
 
+    # Override the existing check in FinderMethod module.
+    # This probably could be solved in other way les intrusive with friendly_id
+    # classes.
     FriendlyId::FinderMethods.class_eval do
       def exists_by_friendly_id?(id)
         send("with_#{friendly_id_config.query_field}_translation", id).exists?
