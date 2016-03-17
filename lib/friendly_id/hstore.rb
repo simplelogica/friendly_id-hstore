@@ -32,7 +32,7 @@ module FriendlyId
 
     def should_generate_new_friendly_id?
       translations = get_field_translations_hash
-      return (translations.blank? || [::I18n.locale.to_s].blank?)
+      return (translations.blank? || translations[::I18n.locale.to_s].nil?)
     end
 
     def set_slug(normalized_slug = nil)
@@ -50,12 +50,12 @@ module FriendlyId
       if should_generate_new_friendly_id?
         candidates = FriendlyId::Candidates.new(self, normalized_slug || send(friendly_id_config.base))
         slug = slug_generator.generate(candidates) || resolve_friendly_id_conflict(candidates)
-        self.send("#{friendly_id_config.slug_column}=", slug)
+        self.send("#{friendly_id_config.query_field}=", slug)
       end
     end
 
     def get_field_translations_hash
-      self.send("#{friendly_id_config.slug_column}_translations")
+      self.send("#{friendly_id_config.query_field}_translations")
     end
 
     # Auxiliar function to execute a block with other locale set
