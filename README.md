@@ -37,6 +37,16 @@ end
 
 Also, remember that the slug field, as any other localized field with `hstore_translate`, should have it's `slug_translations` field in the database.
 
+### Slug (re)generation
+
+If you want to specify when your slug should be (re)generated, you can do it by overwriting the `should_generate_new_friendly_id?` function on your model:
+
+```ruby
+def should_generate_new_friendly_id?
+  self.slug.blank?
+end
+```
+
 ## Tests
 
 Tests haven't been created yet :(
