@@ -9,14 +9,16 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Óscar de Arriba"]
   spec.email         = ["oscar.dearriba@the-cocktail.com"]
 
-  spec.summary       = "Adapter to use friendly_id with hstore_translates for localized slugs"
-  spec.description   = "Adapter to use friendly_id with hstore_translates for localized slugs"
-  spec.homepage      = ""
+  spec.summary       = "Adapter to use friendly_id with hstore_translate for localized slugs"
+  spec.description   = "Adapter to use friendly_id with hstore_translate for localized slugs"
+  spec.homepage      = "https://github.com/simplelogica/friendly_id-hstore/"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.add_dependency "hstore_translate", "~> 1.0.0"
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
