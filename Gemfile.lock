@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     friendly_id-hstore (0.1.0)
+      friendly_id
       hstore_translate (~> 1.0.0)
 
 GEM
@@ -22,6 +23,8 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     builder (3.2.2)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     hstore_translate (1.0.0)
       activerecord (>= 3.1.0)
     i18n (0.7.0)
