@@ -1,8 +1,6 @@
 # FriendlyId::Hstore
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/friendly_id/hstore`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem provides and adapter to be able to manage localized slugs created with `friendly_id` when your project uses `hstore_translate` to store the translations.
 
 ## Installation
 
@@ -22,15 +20,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use the gem, you just have to add it to install it (see the section above) and have `friendly_id` configured.
 
-## Development
+To specify that you are using `hstore_translate` to store the localized slug, you just have yo add `use: :hstore` to the `friendly_id` declaration inside your model:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+class MyModel < ActiveRecord::Base
+  extend FriendlyId
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+  translates :title, :slug
+  friendly_id :title, use: :hstore
+end
+```
+
+**Note:** it's important to have the `slug` attribute (or the one you choose to store the friendly id) in the translations managed by `hstore_translate`. In case your field isn't localized, you can use the `:slugged` strategy instead and avoid this gem.
+
+Also, remember that the slug field, as any other localized field with `hstore_translate`, should have it's `slug_translations` field in the database.
+
+## Tests
+
+Tests haven't been created yet :(
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/friendly_id-hstore.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/simplelogica/friendly_id-hstore.
